@@ -30,7 +30,7 @@ void shaderRecompile();
 
 QTimer *timer;
 GLfloat elapsed;
-const QString fFile = ".\\test1.fs";
+QString fFile = ".\\test1.fs";
 QString currentFShader;
 
 public slots:

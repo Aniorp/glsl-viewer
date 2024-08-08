@@ -1,11 +1,22 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    readFile();
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+void MainWindow::readFile()
+{
     QFile ffile(ui->openGLWidget->fFile);
     if(!ffile.exists())
             qDebug() << "WE POOP \n";
@@ -22,13 +33,6 @@ MainWindow::MainWindow(QWidget *parent)
     }
     ffile.close();
 }
-
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
-
-
 
 void MainWindow::on_pauseButton_clicked()
 {
@@ -47,6 +51,11 @@ void MainWindow::on_exitButton_clicked()
 
 void MainWindow::on_openShaderButton_clicked()
 {
+
+
+    ui->openGLWidget->fFile = QFileDialog::getOpenFileName(this);
+    readFile();
+    qDebug() << "\nFilename: " << ui->openGLWidget->fFile << "\n";
 
 }
 
